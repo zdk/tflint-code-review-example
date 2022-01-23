@@ -1,0 +1,24 @@
+name: reviewdog
+on: [pull_request]
+jobs:
+  tflint:
+    name: runner / tflint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+      - name: Install Terraform
+        run: |
+          brew install terraform
+      - name: Terraform init
+        run: |
+          terraform init
+
+      - name: tflint
+        uses: solacelost/action-tflint@feat/add-init
+        with:
+          github_token: ${{ secrets.my_github_token }}
+          reporter: github-pr-review
+          fail_on_error: "true"
+          tflint_init: true
