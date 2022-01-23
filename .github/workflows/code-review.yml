@@ -19,6 +19,13 @@ jobs:
         uses: solacelost/action-tflint@feat/add-init
         with:
           github_token: ${{ secrets.my_github_token }}
+          reporter: github-pr-check
+          tflint_init: true
+
+      - name: tflint
+        uses: solacelost/action-tflint@feat/add-init
+        with:
+          github_token: ${{ secrets.my_github_token }}
           reporter: github-pr-review
           fail_on_error: "true"
           tflint_init: true
